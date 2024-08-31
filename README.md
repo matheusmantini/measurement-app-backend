@@ -8,7 +8,7 @@
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 
-<p align="center">> Status do Projeto: Completo:</p>
+<p align="center">> Status do Projeto: Completo</p>
 
 ## Como rodar a aplicação:
 
