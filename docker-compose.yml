@@ -1,0 +1,61 @@
+version: "3.8"
+services:
+  nginx:
+    restart: unless-stopped
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    networks:
+      backend:
+    depends_on:
+      - nodeserver
+
+  nodeserver:
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    networks:
+      backend:
+    depends_on:
+      - postgres
+    volumes:
+      - ./src/uploads:/usr/src/uploads
+    secrets:
+      - db_dbname
+      - db_password
+      - db_username
+
+  postgres:
+    image: postgres:13
+    restart: unless-stopped
+    networks:
+      backend:
+    environment:
+      POSTGRES_DB: measurement_app
+      POSTGRES_USER_FILE: /run/secrets/db_username
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    secrets:
+      - db_dbname
+      - db_password
+      - db_username
+
+secrets:
+  db_dbname:
+    file: ./src/secrets/db_dbname.txt
+  db_password:
+    file: ./src/secrets/db_password.txt
+  db_username:
+    file: ./src/secrets/db_username.txt
+
+networks:
+  backend:
+
+volumes:
+  postgres_data:
