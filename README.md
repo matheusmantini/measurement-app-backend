@@ -24,7 +24,7 @@
 
 4. Execute a aplicação em docker:
 
-   > docker compose up -d
+   > docker compose build && docker compose up -d
 
 5. Pronto, agora é possível acessar as rotas a partir da url base: http://localhost:5000/
 
